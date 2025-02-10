@@ -1,83 +1,83 @@
 # BattleShip — Mini Project
 
-## معرفی پروژه
-بازی BattleShip یک بازی دو نفره است که به صورت معمول روی یک صفحه کاغذی انجام می‌شود. در این پروژه قرار است نسخه‌ای ساده از این بازی را در محیط ترمینال پیاده‌سازی کنید. هدف این پروژه تمرین مفاهیم برنامه‌نویسی شی‌گرا (OOP) و تقویت مهارت‌های کدنویسی به زبان Java است.
+## Project Introduction
+The BattleShip game is a two-player game traditionally played on paper. In this project, you will implement a simple version of this game in the terminal. The goal of this project is to practice object-oriented programming (OOP) concepts and strengthen your coding skills in Java.
 
 ---
 
-## قوانین بازی BattleShip
-1. **صفحه بازی:** هر بازیکن یک گرید (شبکه) مربعی دارد که معمولاً اندازه آن 10x10 است.
-   - سطرها با اعداد (0 تا 9) و ستون‌ها با حروف (A تا J) مشخص می‌شوند.
+## BattleShip Game Rules
+1. **Game Board:** Each player has a square grid, usually 10x10.
+   - Rows are labeled with numbers (0 to 9), and columns are labeled with letters (A to J).
 
-2. **قرارگیری کشتی‌ها:**
-   - هر بازیکن باید تعدادی کشتی روی صفحه خود قرار دهد.
-   - کشتی‌ها می‌توانند به صورت افقی یا عمودی قرار بگیرند.
-   - کشتی‌ها نباید با همدیگر تداخل داشته باشند یا از محدوده شبکه خارج شوند.
+2. **Ship Placement:**
+   - Each player must place a number of ships on their board.
+   - Ships can be placed horizontally or vertically.
+   - Ships must not overlap or go outside the grid.
 
-3. **انواع کشتی‌ها:** تعداد و اندازه کشتی‌ها معمولاً به صورت زیر است:
-   - **ناو هواپیمابر:** 5 خانه
-   - **ناوشکن:** 4 خانه
-   - **زیردریایی:** 3 خانه
-   - **قایق گشتی:** 2 خانه
+3. **Types of Ships:** The number and sizes of ships are usually as follows:
+   - **Aircraft Carrier:** 5 cells
+   - **Battleship:** 4 cells
+   - **Submarine:** 3 cells
+   - **Patrol Boat:** 2 cells
 
-4. **نحوه بازی:**
-   - بازی به صورت نوبتی انجام می‌شود.
-   - هر بازیکن در نوبت خود مختصات هدف را وارد می‌کند (مثلاً B5).
-   - اگر شلیک به قسمتی از یک کشتی برخورد کند، "تأیید برخورد" نمایش داده می‌شود. اگر کشتی کامل نابود شود، پیام "کشتی غرق شد" نشان داده می‌شود.
-   - اگر شلیک به آب برخورد کند، پیام "آب" نمایش داده می‌شود.
-   
-5. **شرط برد:**
-   - بازیکنی که ابتدا تمام کشتی‌های حریف را غرق کند، برنده است.
+4. **Gameplay:**
+   - The game proceeds in turns.
+   - On each turn, a player enters a target coordinate (e.g., B5).
+   - If the shot hits a ship, display "Hit." If a ship is completely destroyed, display "Ship Sunk."
+   - If the shot misses, display "Miss."
 
----
-
-## ویژگی‌های ضروری پروژه
-1. **ورودی و خروجی ترمینال:**
-   - برنامه باید در ترمینال اجرا شود و ورودی‌های کاربر را از طریق کنسول دریافت کند.
-
-2. **اعتبارسنجی ورودی:**
-   - مختصات وارد شده باید معتبر باشد (در محدوده شبکه و بدون تکرار).
-   - قرارگیری کشتی‌ها باید بررسی شود تا تداخل نداشته باشند.
-
-3. **نمایش وضعیت:**
-   - وضعیت فعلی بازی (مانند خانه‌های هدف‌گیری شده و کشتی‌های غرق شده) باید به بازیکن نمایش داده شود.
-
-4. **سیستم نوبت‌دهی:**
-   - بازی باید نوبتی بین دو بازیکن یا یک بازیکن و کامپیوتر انجام شود.
-
-5. **اعلان برنده:**
-   - در پایان بازی باید نام برنده نمایش داده شود.
+5. **Winning Condition:**
+   - The player who sinks all opponent ships first wins the game.
 
 ---
 
-## پیشنهاد ساختار کلاس‌ها
-برای کمک به طراحی شی‌گرا، پیشنهاد می‌شود که کلاس‌های زیر ایجاد شوند:
+## Required Features
+1. **Terminal Input and Output:**
+   - The game must run in the terminal and accept user input via the console.
+
+2. **Input Validation:**
+   - The entered coordinates must be valid (within the grid and not repeated).
+   - Ship placement must be validated to prevent overlapping or out-of-bound ships.
+
+3. **Game State Display:**
+   - Show the current game state, including targeted cells and sunken ships.
+
+4. **Turn-Based System:**
+   - The game should alternate turns between two players or between a player and the computer.
+
+5. **Winner Announcement:**
+   - At the end of the game, display the name of the winner.
+
+---
+
+## Suggested Class Structure
+To encourage object-oriented design, it is recommended to create the following classes:
 
 1. **`Game`**
-   - مدیریت کلی بازی و ترتیب نوبت‌ها.
+   - Manages the overall game flow and turn order.
 
 2. **`Player`**
-   - نگهداری اطلاعات بازیکنان و صفحه بازی.
+   - Maintains player information and the game board.
 
 3. **`Board`**
-   - نمایش و مدیریت شبکه بازی.
+   - Displays and manages the game grid.
 
 4. **`Ship`**
-   - نگهداری اطلاعات مربوط به هر کشتی (اندازه، موقعیت و وضعیت).
+   - Stores information about each ship (size, position, and status).
 
 5. **`Coordinate`**
-   - نمایش مختصات یک خانه از صفحه.
+   - Represents a specific cell on the board.
 
 6. **`Utils`**
-   - شامل متدهای کمکی برای نمایش وضعیت صفحه و گرفتن ورودی معتبر.
+   - Contains helper methods for displaying the board and validating input.
 
 ---
 
-## نکات تکمیلی
-- کد خود را به صورت تمیز و مستند بنویسید.
-- از اصول شی‌گرایی (مانند وراثت و کپسوله‌سازی) استفاده کنید.
-- تست‌های لازم را برای بخش‌های مهم برنامه بنویسید.
-- خلاق باشید و در صورت تمایل ویژگی‌های اضافی مانند حالت تک‌نفره یا هوش مصنوعی ساده اضافه کنید.
+## Additional Notes
+- Write clean and well-documented code.
+- Use OOP principles such as encapsulation and inheritance.
+- Write necessary tests for critical parts of the program.
+- Be creative and consider adding optional features like single-player mode or simple AI.
 
-موفق باشید و از یادگیری لذت ببرید!
+Good luck and enjoy learning!
 
