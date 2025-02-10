@@ -1,4 +1,4 @@
-<h1 align="center">✨ 🛥️ <strong>BattleShip Mini Project</strong> 🛥️ ✨</h1>
+<h1 align="center">✨ 🛥️ <strong>BattleShip Mini Project - Phase 1</strong> 🛥️ ✨</h1>
 
 <p align="center">
   <i>Bring the legendary naval strategy game to life in a terminal environment!</i>
