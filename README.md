@@ -10,7 +10,7 @@
 Welcome to the **BattleShip Game** project! This is your chance to create a terminal-based version of the classic strategy game.
 Your mission? **Sink all your opponent’s ships before they sink yours!**
 
-> 🎯 **Objective:** Strengthen your Java programming skills while mastering the principles of **Object-Oriented Programming (OOP)**.
+> 🎯 **Objective:** Strengthen your Java programming skills through hands-on practice.
 
 ---
 
@@ -25,7 +25,7 @@ Your mission? **Sink all your opponent’s ships before they sink yours!**
 - Ships can be positioned **horizontally** or **vertically**.
 - Ships must **not overlap** or go out of bounds.
 
-### 🛳️ **3. Types of Ships**
+### 🛣️ **3. Types of Ships**
 | 🛥 **Ship Type**      | ✂️ **Size (Cells)** |
 |----------------------|--------------------|
 | 🛥 Aircraft Carrier   | 5                  |
@@ -69,28 +69,6 @@ Your mission? **Sink all your opponent’s ships before they sink yours!**
 
 ---
 
-## 💡 **Suggested Class Structure**
-
-### **1. `Game`**
-- Manages the main game flow, turn order, and win conditions.
-
-### **2. `Player`**
-- Stores player information, including the game board and ships.
-
-### **3. `Board`**
-- Manages the player’s grid and keeps track of hits, misses, and ship positions.
-
-### **4. `Ship`**
-- Handles properties like size, position, and damage tracking.
-
-### **5. `Coordinate`**
-- Encapsulates a grid position for easy reference.
-
-### **6. `Utils`**
-- Provides helper functions for input validation, game status updates, and board display.
-
----
-
 ## 🛠️ **Optional Features**
 - 🌐 **Single-Player Mode:** Create a simple AI for the computer opponent.
 - 🔧 **Enhanced Graphics:** Improve the grid display for a more engaging user experience.
@@ -101,7 +79,6 @@ Your mission? **Sink all your opponent’s ships before they sink yours!**
 
 ## 👨‍💻 **Development Tips**
 - Write **clean, modular, and readable code**.
-- Follow OOP principles like **encapsulation, inheritance, and polymorphism**.
 - Use meaningful names for variables and methods.
 - Add **comments** to clarify key parts of your code.
 - Test thoroughly to catch and resolve bugs.
