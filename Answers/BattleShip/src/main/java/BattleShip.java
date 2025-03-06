@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Random;
 
 /**
   The BattleShip class manages the gameplay of the Battleship game between two players.
@@ -22,7 +23,7 @@ public class BattleShip {
     static char[][] player2TrackingGrid = new char[GRID_SIZE][GRID_SIZE];
 
     // Scanner object for user input
-    static Scanner scanner = new Scanner(System.in);
+    static Scanner input = new Scanner(System.in);
 
     /**
       The main method that runs the game loop.
@@ -31,14 +32,14 @@ public class BattleShip {
      */
     public static void main(String[] args) {
         // Initialize grids for both players
-        initializeGrid(player1Grid);
-        initializeGrid(player2Grid);
-        initializeGrid(player1TrackingGrid);
-        initializeGrid(player2TrackingGrid);
+        initializeGrid(player1Grid); // halle
+        initializeGrid(player2Grid); // halle
+        initializeGrid(player1TrackingGrid); // halle
+        initializeGrid(player2TrackingGrid); // halle
 
         // Place ships randomly on each player's grid
-        placeShips(player1Grid);
-        placeShips(player2Grid);
+        placeShips(player1Grid); // halle
+        placeShips(player2Grid); // halle
 
         // Variable to track whose turn it is
         boolean player1Turn = true;
@@ -47,17 +48,21 @@ public class BattleShip {
         while (!isGameOver()) {
             if (player1Turn) {
                 System.out.println("Player 1's turn:");
-                printGrid(player1TrackingGrid);
-                playerTurn(player2Grid, player1TrackingGrid);
+                printGrid(player1TrackingGrid); // halle
+                playerTurn(player2Grid, player1TrackingGrid); // halle
             } else {
                 System.out.println("Player 2's turn:");
-                printGrid(player2TrackingGrid);
-                playerTurn(player1Grid, player2TrackingGrid);
+                printGrid(player2TrackingGrid); // halle
+                playerTurn(player1Grid, player2TrackingGrid); // halle
             }
             player1Turn = !player1Turn;
         }
 
         System.out.println("Game Over!");
+        if (allShipsSunk(player1Grid))
+            System.out.println("Player 2 win!!");
+        else 
+            System.out.println("Player 1 win!1");
     }
 
     /**
@@ -66,7 +71,11 @@ public class BattleShip {
       @param grid The grid to initialize.
      */
     static void initializeGrid(char[][] grid) {
-        //todo
+        for (int i=0; i<10; i++) {
+            for (int j=0; j<10; j++) {
+                grid[i][j] = '~';
+            }
+        }
     }
 
     /**
@@ -75,8 +84,87 @@ public class BattleShip {
 
       @param grid The grid where ships need to be placed.
      */
-    static void placeShips(char[][] grid) {
-        //todo
+    static void placeShips(char[][] grid) {        
+    int[] sizeOfShip = {2, 2, 3, 4, 5};
+    Random rand = new Random();
+    for (int size : sizeOfShip) {
+        boolean placed = false;
+        String str1 = rand.nextBoolean() ? "ofoghy" : "amodi";
+        String str2 = rand.nextBoolean() ? "manfi" : "mothbat";
+        while (!placed) {
+            switch (str1) {
+                case "ofoghy" -> {
+                    int randRow = rand.nextInt(10);
+                    int randColumn = rand.nextInt(11 - size);
+                    boolean canPlace = true;
+                    switch (str2) {
+                        case "mothbat" -> {
+                            for (int i=0; i<size; i++) {
+                                if (grid[randRow][randColumn + i] == 'S') {
+                                    canPlace = false;
+                                    break;
+                                }
+                            }
+                            if (canPlace) {
+                                for (int i=0; i<size; i++) 
+                                    grid[randRow][randColumn + i] = 'S';
+                                placed = true;
+                            }
+                        }
+
+                        case "manfi" -> {
+                            for (int i=0; i<size; i++) {
+                                if (randColumn - i < 0 || grid[randRow][randColumn - i] == 'S') {
+                                    canPlace = false;
+                                    break;
+                                }
+                            }
+                            if (canPlace) {
+                                for (int i=size-1; i>=0; i--) 
+                                    grid[randRow][randColumn - i] = 'S';
+                                placed = true;
+                            }
+                        }
+                    } 
+                }
+                case "amodi" -> {
+                    int randRow = rand.nextInt(11 - size);
+                    int randColumn = rand.nextInt(10);
+                    boolean canPlace = true;
+                    switch (str2) {
+                        case "mothbat" -> {
+                            for (int i=0; i<size; i++) {
+                                if (grid[randRow + i][randColumn] == 'S') {
+                                    canPlace = false;
+                                    break;
+                                } 
+                            }
+                            if (canPlace) {
+                                for (int i=0; i<size; i++) {
+                                    grid[randRow + i][randColumn] = 'S';
+                                }
+                                placed = true;
+                            }
+                        }
+                        case "manfi" -> {
+                            for (int i=0; i<size; i++) {
+                                if (randRow - i < 0 || grid[randRow - i][randColumn] == 'S') {
+                                    canPlace = false;
+                                    break;
+                                }
+                            }
+                            if (canPlace) {
+                                for (int i=size-1; i>=0; i--) {
+                                    grid[randRow - i][randColumn] = 'S';
+                                }
+                                placed = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
     }
 
     /**
@@ -91,11 +179,7 @@ public class BattleShip {
       @param horizontal The direction of the ship (horizontal or vertical).
       @return true if the ship can be placed at the specified location, false otherwise.
      */
-    static boolean canPlaceShip(char[][] grid, int row, int col, int size, boolean horizontal) {
-        //todo
-        return true;
-    }
-
+    
     /**
       Manages a player's turn, allowing them to attack the opponent's grid
       and updates their tracking grid with hits or misses.
@@ -104,7 +188,39 @@ public class BattleShip {
       @param trackingGrid The player's tracking grid to update.
      */
     static void playerTurn(char[][] opponentGrid, char[][] trackingGrid) {
-        //todo
+        int row = 0;
+        int column = 0;
+        Boolean bool = false;
+
+        while (!bool) {
+            try {
+                System.out.print("Enter row (1-10) : ");
+                row = input.nextInt();
+                System.out.print("Enter column (1-10) : ");
+                column = input.nextInt();
+                input.nextLine();
+                if (row < 1 || row > 10 || column < 1 || column > 10)
+                    System.out.print("Invalid input (input row and column between '1' and '10'), try again!!");
+
+                else if (trackingGrid[row-1][column-1] == 'O' || trackingGrid[row-1][column-1] == 'X')
+                    System.out.print("Invalid input (you have already attacked this location), try again!!");
+                else
+                    bool = true;
+            } catch (java.util.InputMismatchException e) {
+                System.out.println("Invalid input (Enter number only), try again!!");
+                input.nextLine();
+            }
+        }
+        if (opponentGrid[row-1][column-1] == 'S') {
+            System.out.println("Hit!!");
+            opponentGrid[row-1][column-1] = 'X';
+            trackingGrid[row-1][column-1] = 'X';
+        }
+        else {
+            System.out.println("Missed!!");
+            trackingGrid[row-1][column-1] = 'O';
+        }
+
     }
 
     /**
@@ -113,8 +229,25 @@ public class BattleShip {
       @return true if the game is over (all ships are sunk), false otherwise.
      */
     static boolean isGameOver() {
-        //todo
-        return false;
+        int count1 = 0;
+        int count2 = 0;
+        for (int i=0; i<10; i++) {
+            for (int j=0; j<10; j++) {
+                if (player1Grid[i][j] == 'S')
+                    count1++;
+            }
+        }
+        for (int i=0; i<10; i++) {
+            for (int j=0; j<10; j++) {
+                if (player2Grid[i][j] == 'S')
+                    count2++;
+            }
+        }
+
+        if (count1 != 0 && count2 != 0)
+            return false;
+        else 
+            return true;
     }
 
     /**
@@ -124,19 +257,17 @@ public class BattleShip {
       @return true if all ships are sunk, false otherwise.
      */
     static boolean allShipsSunk(char[][] grid) {
-        //todo
-        return true;
-    } 
-
-    /**
-      Validates if the user input is in the correct format (e.g., A5).
-
-      @param input The input string to validate.
-      @return true if the input is in the correct format, false otherwise.
-     */
-    static boolean isValidInput(String input) {
-        //todo
-        return true;
+        int count = 0;
+        for (int i=0; i<10; i++) {
+            for (int j=0; j<10; j++) {
+                if (grid[i][j] == 'S')
+                    count++;
+            }
+        }
+        if (count == 0) 
+            return true;
+        else
+            return false;
     }
 
     /**
@@ -146,6 +277,33 @@ public class BattleShip {
       @param grid The tracking grid to print.
      */
     static void printGrid(char[][] grid) {
-        //todo
+        System.out.print("    " + 1);
+        for (int i=2; i<=10; i++) {
+            System.out.print("   " + i);
+        }
+        System.out.println();
+        for (int i = 0; i < 10; i++) {
+            if (i != 9) 
+                System.out.print((i+1) + " ");
+            else 
+                System.out.print(10);
+            for (int j = 0; j < 10; j++) {
+                System.out.print("|");
+                System.out.print(" " + grid[i][j] + " ");
+                if (j == 9) {
+                    System.out.print("|");
+                }
+            }
+            System.out.println();
+            if (i != 9) {
+                for (int j = 0; j < 14; j++) {
+                    System.out.print("  -");
+                    // if (j == 9)
+                    //     System.out.print("-");
+                }
+                System.out.println();
+            }
+        }
+        System.out.println();
     }
 }
