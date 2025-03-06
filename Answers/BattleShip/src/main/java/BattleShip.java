@@ -126,7 +126,7 @@ public class BattleShip {
     static boolean allShipsSunk(char[][] grid) {
         //todo
         return true;
-    }
+    } 
 
     /**
       Validates if the user input is in the correct format (e.g., A5).
